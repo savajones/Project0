@@ -21,7 +21,7 @@ object JDBC {
 
       // create the statement, and run the select query
       val statement = connection.createStatement()
-      val resultSet = statement.executeQuery("SELECT * FROM users;") //select table
+      val resultSet = statement.executeQuery("SELECT * FROM accounts;") //select table
       while ( resultSet.next() ) {
         println(resultSet.getString(1)+", " +resultSet.getString(2) +", " +resultSet.getString(3))
       }

@@ -8,3 +8,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "Project0"
   )
+
+//git add -A
+//git commit -a -m "Project0"
+//git push

@@ -4,19 +4,13 @@ import scala.io.StdIn.readInt
 object Banking {
 
   def main(args: Array[String]): Unit = {
-    println("Welcome to Trusted Jones Bank!")
-    val clientName: String = readLine("What is your name?")
-    println(s"Hello $clientName, how can I help you today?")
-    val help =
-      s"""
-         |Type "1" to create a new account
-         |Type "2" to access an existing account
-         |Type "3" to delete your account
-         |""".stripMargin
-    println(help)
-    var one = readInt()
-    var two = readInt()
-    var three = readInt()
+    println("Welcome back to Trusted Bank, Savannah!")
+    val accountIntro: String = readLine("What account would you like to access: Checking or Savings?")
+    println(s"Let's take a look at your $accountIntro account!")
+
+    val option: String = readLine("Would you like to make a deposit, withdrawal, or transfer funds?")
+
+
 
 
   }
