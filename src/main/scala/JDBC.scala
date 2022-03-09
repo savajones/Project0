@@ -1,6 +1,6 @@
 import java.sql.{Connection, DriverManager}
-import java.sql.PreparedStatement
-import java.sql.SQLException
+//import java.sql.PreparedStatement
+//import java.sql.SQLException
 
 object JDBC {
   def main(args: Array[String]) {
