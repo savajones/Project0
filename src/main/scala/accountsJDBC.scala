@@ -1,8 +1,6 @@
 import java.sql.{Connection, DriverManager}
-//import java.sql.PreparedStatement
-//import java.sql.SQLException
 
-object JDBC {
+object accountsJDBC {
   def main(args: Array[String]) {
 
     val driver = "com.mysql.cj.jdbc.Driver"
@@ -19,7 +17,7 @@ object JDBC {
       val statement = connection.createStatement()
       val resultSet = statement.executeQuery("SELECT * FROM accounts;")
       while ( resultSet.next() ) {
-        println(resultSet.getString(1)+", " +resultSet.getString(2) +", " +resultSet.getString(3))
+        //println()
       }
     } catch {
       case e: Throwable => e.printStackTrace
