@@ -4,7 +4,7 @@ import scala.io.StdIn.readInt
 object Banking {
 
   def main(args: Array[String]): Unit = {
-    println("Welcome back to Trusted Bank, Savannah!")
+    println("Welcome to Trusted Bank!")
     println("How can we help you today?")
     println("Type 1 to see your account details")
 
@@ -38,10 +38,15 @@ object Banking {
       if (help3 == 2){
         println("How much would you like to withdraw?")
         val withdrawal = readInt()
-        checkingBalance -= withdrawal
-        println(f"Your new balance is $$$checkingBalance%1.2f")
-        //overdraft limit
+        if(withdrawal > 500){
+          println("DECLINED: Overdraft limit is $500")
+        }
+        else{
+          checkingBalance -= withdrawal
+          println(f"Your new balance is $$$checkingBalance%1.2f")
+        }
       }
+      //update accounts table
     }
     def savingsAccount(): Unit={
       val savingsBalance : Int = 7600
@@ -49,7 +54,7 @@ object Banking {
       println("Type 1 to see interest history")
       val help4 = readInt()
       if (help4 == 1){
-        //interest history
+        // display interest history
       }
     }
     def newAccount(): Unit={
@@ -63,6 +68,7 @@ object Banking {
            |Opening Balance: $$$accountAmount%1.2f
            |Account Number: $accountNumber
            |""".stripMargin)
+      //add to customer table
     }
 
     val help = readInt()
