@@ -1,9 +1,30 @@
+import java.sql.{Connection, DriverManager}
 import scala.io.StdIn.readLine
 import scala.io.StdIn.readInt
 
 object Banking {
 
   def main(args: Array[String]): Unit = {
+    val driver = "com.mysql.cj.jdbc.Driver"
+    val url = "jdbc:mysql://localhost:3306/Bankingapp"
+    val username = "root"
+    val password = "password"
+
+    var connection:Connection = null
+
+    try {
+      Class.forName(driver)
+      connection = DriverManager.getConnection(url, username, password)
+
+      val statement = connection.createStatement()
+      val resultSet = statement.executeQuery("SELECT * FROM accounts;")
+      while ( resultSet.next() ) {
+        //println()
+      }
+    } catch {
+      case e: Throwable => e.printStackTrace
+    }
+    connection.close()
 
     println("Welcome to Trusted Bank!")
     println("How can we help you today?")
