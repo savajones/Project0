@@ -11,20 +11,9 @@ object Banking {
     val password = "password"
 
     var connection:Connection = null
-
-    try {
-      Class.forName(driver)
-      connection = DriverManager.getConnection(url, username, password)
-
-      val statement = connection.createStatement()
-      val resultSet = statement.executeQuery("SELECT * FROM accounts;")
-      while ( resultSet.next() ) {
-        //println()
-      }
-    } catch {
-      case e: Throwable => e.printStackTrace
-    }
-    connection.close()
+    Class.forName(driver)
+    connection = DriverManager.getConnection(url, username, password)
+    val statement = connection.createStatement()
 
     println("Welcome to Trusted Bank!")
     println("How can we help you today?")
@@ -62,14 +51,19 @@ object Banking {
           val withdrawal = readInt()
           if (withdrawal > 500) {
             println("DECLINED: Overdraft limit is $500")
+            println("Please enter a different amount to withdraw")
+            val withdrawal2 = readInt()
+            checkingBalance -= withdrawal2
+            println(f"Your new balance is $$$checkingBalance.00")
           }
           else {
             checkingBalance -= withdrawal
             println(f"Your new balance is $$$checkingBalance.00")
           }
       }
-      //statement.executeUpdate(s"INSERT INTO accounts () VALUES (${},..)
+      statement.executeUpdate(s"UPDATE accounts SET checking=$checkingBalance WHERE account_number=4567")
     }
+
     def savingsAccount(): Unit={
       val savingsBalance : Int = 7600
       println(f"You have $$$savingsBalance.00 in your account")
@@ -96,8 +90,9 @@ object Banking {
              |Opening Balance: $$$accountAmount.00
              |Account Number: $accountNumber
              |""".stripMargin)
-        //statement.executeUpdate(s"INSERT INTO customer () VALUES (${},..)
-        //statement.executeUpdate(s"INSERT INTO accounts () VALUES (${},..)
+          //statement.executeUpdate("INSERT INTO customer (account_id) VALUES (2)")
+          //statement.executeUpdate(s"INSERT INTO customer (name,account_number,member_since) VALUES ($accountName,$accountNumber,2022")
+
         case 2 =>
           println("How much are you putting in this account?")
           val accountAmount2 = readInt()
@@ -118,6 +113,23 @@ object Banking {
     help match{
       case 1 =>
         accountDetails()
+        println("What would you like to do next?")
+        println("Type 1 to manage your accounts")
+        println("Type 2 to leave the bank")
+        val a = readInt()
+        a match{
+          case 1 =>
+            println("Type 1 for checking or 2 for savings")
+            val b = readInt()
+            b match{
+              case 1 =>
+                checkingAccount()
+              case 2 =>
+                savingsAccount()
+            }
+          case 2 =>
+            println("Thank you for using Trusted Bank!")
+        }
       case 2 =>
         println("Type 1 for Checking or 2 for Savings")
         val help2 = readInt()
@@ -125,7 +137,7 @@ object Banking {
         case 1 =>
           checkingAccount()
         case 2 =>
-        savingsAccount()
+          savingsAccount()
       }
       case 3 =>
         newAccount()
