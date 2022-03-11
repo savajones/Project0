@@ -45,26 +45,20 @@ object Banking {
       //println("Please try again or type 1 to create a new account")
     }
     def checkingAccount(): Unit={
-      var checkingBalance:Int = 3000
-      //println("Please verify your account number")
-      //val accountNumber = readInt()
-      //val cb = statement.executeQuery(s"SELECT checking FROM accounts WHERE account_number=$accountNumber")
-      /*
+      println("Please verify your account number")
+      val accountNumber = readInt()
+      val cb = statement.executeQuery(s"SELECT checking FROM accounts WHERE account_number=$accountNumber")
       while (cb.next()){
-        val cb2 = cb.getInt("checking")
-        println("You have ___ in your account")
-        *insert code below*
-      }
-       */
-      println(f"You have $$$checkingBalance.00 in your account")
-      println("Type 1 to make a deposit or 2 to withdraw")
-      val help3 = readInt()
-      help3 match {
-        case 1 =>
-          println("How much would you like to deposit?")
-          val deposit = readInt()
-          checkingBalance += deposit
-          println(f"Your new balance is $$$checkingBalance.00")
+        var cb2 = cb.getInt("checking")
+        println(s"You have $$$cb2.00 in your account")
+        println("Type 1 to make a deposit or 2 to withdraw")
+        val help3 = readInt()
+        help3 match {
+          case 1 =>
+            println("How much would you like to deposit?")
+            val deposit = readInt()
+            cb2 += deposit
+            println(f"Your new balance is $$$cb2.00")
         case 2 =>
           println("How much would you like to withdraw?")
           val withdrawal = readInt()
@@ -72,36 +66,37 @@ object Banking {
             println("DECLINED: Overdraft limit is $500")
             println("Please enter a different amount to withdraw")
             val withdrawal2 = readInt()
-            checkingBalance -= withdrawal2
-            println(f"Your new balance is $$$checkingBalance.00")
+            cb2 -= withdrawal2
+            println(f"Your new balance is $$$cb2.00")
           }
           else {
-            checkingBalance -= withdrawal
-            println(f"Your new balance is $$$checkingBalance.00")
+            cb2 -= withdrawal
+            println(f"Your new balance is $$$cb2.00")
+            //statement.executeUpdate(s"UPDATE accounts SET checking=$cb2 WHERE account_number=$accountNumber")
           }
+          statement.executeUpdate(s"UPDATE accounts SET checking=$cb2 WHERE account_number=$accountNumber")
+            //updates with deposit not withdrawal
+        }
       }
-      statement.executeUpdate(s"UPDATE accounts SET checking=$checkingBalance WHERE account_number=$accountNumber")
-    }
 
+    }
     def savingsAccount(): Unit={
-      val savingsBalance : Int = 7600
-      //println("Please verify your account number")
-      //val accountNumber = readInt()
-      //val sb = statement.executeQuery(s"SELECT savings FROM accounts WHERE account_number=$accountNumber")
-      /*
+      println("Please verify your account number")
+      val accountNumber = readInt()
+      val sb = statement.executeQuery(s"SELECT savings FROM accounts WHERE account_number=$accountNumber")
       while (sb.next()){
         val sb2 = sb.getInt("savings")
-        println("You have ___ in your account")
-        *insert code below*
-      }
-       */
-      println(f"You have $$$savingsBalance.00 in your account")
-      println("Type 1 to see current interest")
-      val help4 = readInt()
-      help4 match{
-        case 1 =>
-        // display interest
-        //println(statement.executeQuery(s"SELECT interest_rate FROM interest WHERE account_number=$accountNumber AND member_since=2022"))
+        println(s"You have $$$sb2.00 in your account")
+        println("Type 1 to see current interest")
+        val help4 = readInt()
+        help4 match{
+          case 1 =>
+            val in = statement.executeQuery(s"SELECT interest_rate FROM interest WHERE year=2020 AND account_number=$accountNumber")
+            while (in.next()){
+              val in2 = in.getInt("interest_rate")
+              println(s"Your current interest rate is $in2%")
+            }
+        }
       }
     }
     def newAccount(): Unit={
@@ -118,9 +113,9 @@ object Banking {
              |Opening Balance: $$$accountAmount.00
              |Account Number: $accountNumber
              |""".stripMargin)
-          //statement.executeLargeUpdate(s"INSERT INTO customer (name,account_number,member_since) VALUES ($accountName,$accountNumber,2022)")
-          //statement.executeUpdate(s"INSERT INTO customer (name,account_number,member_since) VALUES ($accountName,$accountNumber,2022")
-
+          //statement.executeUpdate(s"INSERT INTO customer (name,account_number,member_since) VALUES ('$accountName','$accountNumber','2022')")
+          //statement.executeUpdate(s"INSERT INTO accounts (account_number,checking) VALUES ('$accountNumber','$accountAmount')")
+          //insert into
         case 2 =>
           println("How much are you putting in this account?")
           val accountAmount2 = readInt()
@@ -131,8 +126,8 @@ object Banking {
              |Account Number: $accountNumber
              |Interest Rate: ___
              |""".stripMargin)
-        //statement.executeUpdate(s"INSERT INTO accounts (savings) VALUES ($accountAmount2)")
-        //statement.executeUpdate(s"INSERT INTO interest (account_number) VALUES ($accountNumber)")
+          //statement.executeUpdate(s"INSERT INTO accounts (savings) VALUES ('$accountAmount2')")
+          //statement.executeUpdate(s"INSERT INTO interest (account_number) VALUES ('$accountNumber')")
       }
       //update tables
     }
