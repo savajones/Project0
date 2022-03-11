@@ -19,21 +19,31 @@ object Banking {
     println("How can we help you today?")
     println("Type 1 to see your account details")
 
-    val customerName : String = "Savannah Jones"
+    //val customerName : String = "Savannah Jones"
     var accountNumber: Int = 4567
-    val memberSince : Int = 2016
+    //val memberSince : Int = 2016
 
     println("Type 2 to access your accounts")
     println("Type 3 to open a new account")
     println("Type 4 to leave the bank")
 
     def accountDetails(): Unit={
-      println(
-        s"""
-           |Name: $customerName
-           |Account Number: $accountNumber
-           |Member Since: $memberSince
-           |""".stripMargin)
+      println("What is your account number?")
+      val accountNumber = readInt()
+      val r = statement.executeQuery(s"SELECT * FROM customer WHERE account_number=$accountNumber")
+      while (r.next()){
+        val s = r.getString("name")
+        val t = r.getInt("account_number")
+        val u = r.getInt("member_since")
+        println(
+          s"""
+             |Name: $s
+             |Account Number: $t
+             |Member Since: $u
+             |""".stripMargin)
+      }
+      //if no account println("We could not find a record of that account")
+      //println("Type 1 to create a new account")
     }
     def checkingAccount(): Unit={
       var checkingBalance: Int = 3000
@@ -67,12 +77,12 @@ object Banking {
     def savingsAccount(): Unit={
       val savingsBalance : Int = 7600
       println(f"You have $$$savingsBalance.00 in your account")
-      println("Type 1 to see interest history")
+      println("Type 1 to see interest rate history")
       val help4 = readInt()
       help4 match{
-        case 1 => println("interest history")
+        case 1 =>
         // display interest history
-        //statement.executeUpdate(s"SELECT * FROM interest (account number specified)
+        //println(statement.executeQuery(s"SELECT interest_rate FROM interest WHERE account_number=4567"))
       }
     }
     def newAccount(): Unit={
@@ -83,14 +93,15 @@ object Banking {
         case 1 =>
           println("How much are you putting in this account?")
           val accountAmount = readInt()
-          accountNumber += 1042
+          val accountNumber2 = new scala.util.Random
+          val accountNumber = 1000 + accountNumber2.nextInt((9999-1000)+50)
           println(
             f"""
              |Name: $accountName
              |Opening Balance: $$$accountAmount.00
              |Account Number: $accountNumber
              |""".stripMargin)
-          //statement.executeUpdate("INSERT INTO customer (account_id) VALUES (2)")
+          //statement.executeLargeUpdate(s"INSERT INTO customer (name,account_number,member_since) VALUES ($accountName,$accountNumber,2022)")
           //statement.executeUpdate(s"INSERT INTO customer (name,account_number,member_since) VALUES ($accountName,$accountNumber,2022")
 
         case 2 =>
@@ -101,10 +112,10 @@ object Banking {
              |Name: $accountName
              |Opening Balance: $$$accountAmount2
              |Account Number: $accountNumber
-             |Interest Rate:
+             |Interest Rate: 3.8%%
              |""".stripMargin)
-        //statement.executeUpdate(s"INSERT INTO accounts () VALUES (${},..)
-        //statement.executeUpdate(s"INSERT INTO interest () VALUES (${},..)
+        //statement.executeUpdate(s"INSERT INTO accounts (savings) VALUES ($accountAmount2)")
+        //statement.executeUpdate(s"INSERT INTO interest (account_number) VALUES ($accountNumber)")
       }
       //add to customer table
     }
