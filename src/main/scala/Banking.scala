@@ -172,6 +172,7 @@ object Banking {
                 a2 match {
                   case 1 =>
                     savingsAccount()
+                    println("Thank you for using Trusted Bank!")
                   case 2 =>
                     println("Thank you for using Trusted Bank!")
                 }
@@ -182,6 +183,7 @@ object Banking {
                 a3 match {
                   case 1 =>
                     checkingAccount()
+                    println("Thank you for using Trusted Bank!")
                   case 2 =>
                     println("Thank you for using Trusted Bank!")
                 }
@@ -200,6 +202,7 @@ object Banking {
             a4 match {
               case 1 =>
                 savingsAccount()
+                println("Thank you for using Trusted Bank!")
               case 2 =>
                 println("Thank you for using Trusted Bank!")
             }
@@ -210,6 +213,7 @@ object Banking {
             a5 match {
               case 1 =>
                 checkingAccount()
+                println("Thank you for using Trusted Bank!")
               case 2 =>
                 println("Thank you for using Trusted Bank!")
             }
