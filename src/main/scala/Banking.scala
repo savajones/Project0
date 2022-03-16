@@ -127,7 +127,7 @@ object Banking {
           println(
             f"""
                |Name: $accountName
-               |Opening Savings Balance: $$$accountAmount.00
+               |Opening Savings Balance: $$$accountAmount2.00
                |Interest Rate: 3.2%%
                |Account Number: $accountNumber
                |""".stripMargin)
