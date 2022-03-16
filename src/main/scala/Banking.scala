@@ -1,7 +1,7 @@
 import java.sql.{Connection, DriverManager}
 import scala.io.StdIn.readLine
 import scala.io.StdIn.readInt
-
+import scala.io.Source
 
 
 object Banking {
@@ -225,6 +225,11 @@ object Banking {
       case 4 =>
         println("Thank you for using Trusted Bank!")
     }
+
+    //val filename = "read.csv"
+    //for(line <- Source.fromFile(filename).getLines){
+      //println(line)
+    //}
 
     //val demo = scala.io.Source.fromFile("read.csv").mkString
     //var inputString = new String
