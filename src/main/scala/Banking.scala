@@ -26,11 +26,6 @@ object Banking {
     val statement7 = connection.createStatement()
     val statement8 = connection.createStatement()
 
-    //val newacc = scala.io.Source.fromFile(newaccount.csv).mkString
-    //var inputString = new String
-    //inputString = s"INSERT INTO customer VALUES($newacc);"
-    //statement.executeUpdate(inputString)
-
     println("Welcome to Trusted Bank!")
     println("How can we help you today?")
     println("Type 1 to see your account details")
@@ -226,6 +221,19 @@ object Banking {
       case 4 =>
         println("Thank you for using Trusted Bank!")
     }
+
+    //val demo = scala.io.Source.fromFile("read.csv").mkString
+    //var inputString = new String
+    //inputString = s"INSERT INTO customer VALUES($demo);"
+    //statement.executeUpdate(inputString)
+
+    //println("Read from CSV:")
+    //val bufferedSource = io.Source.fromFile("read.csv")
+    //for (line <- bufferedSource.getLines){
+      //val cols = line.split(",").map(_.trim)
+      //println(s"${cols(0)}|${cols(1)}|${cols(2)}|${cols(3)}")
+    //}
+
   }
 }
 
